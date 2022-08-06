@@ -60,3 +60,60 @@ fn maps_equal(maps: &[HashMap<String, i32>]) -> bool {
 
     true
 }
+
+#[cfg(test)]
+mod tests {
+    use std::{fs, path::Path};
+
+    use crate::compare_lines;
+
+    // Test two identical files return true
+    #[test]
+    fn test_compare_lines_set1() {
+        let file1_path = Path::new("src/testdata/set1/file1.txt");
+        let file2_path = Path::new("src/testdata/set1/file2.txt");
+
+        let file1 = fs::read_to_string(file1_path).unwrap();
+        let file2 = fs::read_to_string(file2_path).unwrap();
+
+        assert!(compare_lines(vec![file1, file2]));
+    }
+
+    // Test two files with identical lines in different places returns true
+    #[test]
+    fn test_compare_lines_set2() {
+        let file1_path = Path::new("src/testdata/set2/file1.txt");
+        let file2_path = Path::new("src/testdata/set2/file2.txt");
+
+        let file1 = fs::read_to_string(file1_path).unwrap();
+        let file2 = fs::read_to_string(file2_path).unwrap();
+
+        assert!(compare_lines(vec![file1, file2]));
+    }
+
+    // Test files with difference lengths are not equal
+    #[test]
+    fn test_compare_lines_set3() {
+        let file1_path = Path::new("src/testdata/set3/file1.txt");
+        let file2_path = Path::new("src/testdata/set3/file2.txt");
+        let file3_path = Path::new("src/testdata/set3/file3.txt");
+
+        let file1 = fs::read_to_string(file1_path).unwrap();
+        let file2 = fs::read_to_string(file2_path).unwrap();
+        let file3 = fs::read_to_string(file3_path).unwrap();
+
+        assert!(!compare_lines(vec![file1, file2, file3]));
+    }
+
+    // Test files with similar but different content are not equal
+    #[test]
+    fn test_compare_lines_set4() {
+        let file1_path = Path::new("src/testdata/set4/file1.txt");
+        let file2_path = Path::new("src/testdata/set4/file2.txt");
+
+        let file1 = fs::read_to_string(file1_path).unwrap();
+        let file2 = fs::read_to_string(file2_path).unwrap();
+
+        assert!(!compare_lines(vec![file1, file2]));
+    }
+}
