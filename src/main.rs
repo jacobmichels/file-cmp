@@ -6,7 +6,7 @@ use file_cmp::compare_lines;
 
 #[derive(Parser)]
 struct Args {
-    #[clap(min_values = 2)]
+    #[clap(required = true, min_values = 2)]
     files: Vec<String>,
 }
 
