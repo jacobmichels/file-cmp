@@ -5,6 +5,11 @@ use clap::Parser;
 use file_cmp::compare_lines;
 
 #[derive(Parser)]
+#[clap(
+    author = "Jacob Michels",
+    version = "0.1.0",
+    about = "Compare lines within text files"
+)]
 struct Args {
     #[clap(required = true, min_values = 2)]
     files: Vec<String>,
