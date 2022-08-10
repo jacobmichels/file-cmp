@@ -44,6 +44,11 @@ foo
 
 `file-cmp file1.txt file2.txt` outputs `Not equal` and exitcode 1.
 
+## Install
+Cargo can build and install this app from this repo.
+
+`cargo +nightly install --git https://github.com/jacobmichels/file-cmp`
+
 ## Compiling
 This app requires rust nightly. The following instructions assume you have git and rustup installed.
 
